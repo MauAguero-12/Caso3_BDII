@@ -18,10 +18,11 @@ const articulos = mongoose.model('articulos',
     active: Boolean
 })
 
-const bids = mongoose.model('articulos',
+const bids = mongoose.model('pujas',
 {
-    articleID: Number,      //para identificar cual articulo es
+    bidArticleID: Number,   //para identificar cual articulo es
     bidder: String,         //nombre del ofertador
-    amount: Number          //cantidad que oferta en la subasta
+    amount: Number,         //cantidad que oferta en la subasta
+    bidDate: Date
 
 })
