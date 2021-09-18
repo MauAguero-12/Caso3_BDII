@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { Logger } from '../common';
 import {kindnessrouter} from './kindness';
-import {articlesrouter} from './articlesrouter';
+import {articlesrouter} from './addArticlesrouter';
 
 class Routes {
 

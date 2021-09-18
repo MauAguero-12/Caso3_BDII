@@ -5,8 +5,8 @@ import { ArticleController } from '../controllers'
 const app = express();
 const log = new Logger();
 
-app.get("/list", (req, res,next) => {
-    ArticleController.getInstance().listArticles()
+app.get("/add", (req, res,next) => {
+    ArticleController.getInstance().Agregar()
     .then((data)=>{
         res.json(data);
     })
@@ -17,4 +17,4 @@ app.get("/list", (req, res,next) => {
 
 });
 
-export { app as articlesrouter };
+export { app as addArticlesrouter };

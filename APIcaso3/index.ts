@@ -1,8 +1,9 @@
 import App from './app';
 import * as  http from 'http'
 import { Logger } from './common'
+require('./conexion'); //importa el archivo de conexion
 
-const port = 5000;
+const port = 5000;  //abre una conexión en el puerto 5000
 const logger = new Logger();
 
 App.set('port', port);
