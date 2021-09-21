@@ -13,7 +13,9 @@ const {moment} = require('moment');
 // se creara las 4 funciones solicitadas
 //se accede a una nueva conexion...
 
-
+function getArraysIntersection(a1,a2){
+    return  a1.filter(function(n) { return a2.indexOf(n) !== -1;});
+}
 
 export class subasta_articulos {
     private log: Logger;
@@ -121,16 +123,96 @@ export class subasta_articulos {
     }
     
 
+
+
+
     //función de listar los artículos en subasta segun los articulos
-    public listArticles() : Promise<any>
+    public listArticles(req, res) : Promise<any>
     {
-        return null;
+        return articulos.find({active: true}).exec()
+            .then(() => {
+                var arrayArticulos = articulos.find({active: true}).exec();
+
+                if (req.body.pOwner == true){
+                    const ownerArray = articulos.find({owner: req.body.owner}).exec();
+                    arrayArticulos = getArraysIntersection(arrayArticulos, ownerArray);
+                }
+
+                if (req.body.pArticleYear == true){
+                    const yearArray = articulos.find({articleYear: req.body.articleYear}).exec();
+                    arrayArticulos = getArraysIntersection(arrayArticulos, yearArray);
+                }
+                if (req.body.pMaxArticleYear == true){
+                    const maxYearArray = articulos.find({articleYear:{$lte: req.body.maxArticleYear}}).exec();
+                    arrayArticulos = getArraysIntersection(arrayArticulos, maxYearArray);
+                }
+                if (req.body.pMinArticleYear == true){
+                    const minYearArray = articulos.find({articleYear:{$gte: req.body.minArticleYear}}).exec();
+                    arrayArticulos = getArraysIntersection(arrayArticulos, minYearArray);
+                }
+
+                if (req.body.pMinPrice == true){
+                    const minPriceArray = articulos.find({actualPrice: {$gte: req.body.minActualPrice}}).exec();
+                    arrayArticulos = getArraysIntersection(arrayArticulos, minPriceArray);
+                }
+                if (req.body.pMaxPrice == true){
+                    const maxPriceArray = articulos.find({actualPrice: {$lte: req.body.maxActualPrice}}).exec();
+                    arrayArticulos = getArraysIntersection(arrayArticulos, maxPriceArray);
+                }
+
+                if (req.body.pMinEndDate == true){
+                    const minDateArray = articulos.find({endDate: {$gte: req.body.minEndDate}}).exec();
+                    arrayArticulos = getArraysIntersection(arrayArticulos, minDateArray);
+                }
+                if (req.body.pMaxEndDate == true){
+                    const maxDateArray = articulos.find({endDate: {$lte: req.body.maxEndDate}}).exec();
+                    arrayArticulos = getArraysIntersection(arrayArticulos, maxDateArray);
+                }
+
+                console.log(arrayArticulos);
+            })
+            .catch((error: any) => {
+                const result = res.status(500).json({
+                    error: true,
+                    message: `Error: ${error}`,
+                    code: 0
+                });
+            });
     }
 
     //función de ofertar un articulo
-    public offerArticles() : Promise<any>
+    public offerArticles(req, res) : Promise<any>
     {
-        return null;
+        return articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, active:true}).exec()
+            .then(() => {
+                const id = articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, active: true}, {articleID:0, _id: 0}).exec();
+
+                const cant = articulos.findOne({articleName: req.body.articleName, owner: req.body.owner},{actualPrice:0,_id:0}).exec();
+
+                if (cant < req.body.amount){
+                    const newBid = new bids(
+                        {
+                            bidArticleID: id,
+                            bidder: req.body.bidder,
+                            amount: req.body.amount,
+                            bidDate: moment()
+                        }
+                    );
+
+                    console.log(newBid);
+                    newBid.save();
+                }
+                else{
+                    console.log('Debe apostar un monto mayor a %d', cant);
+                }
+            })
+            .catch((error: any) => {
+                const result = res.status(500).json({
+                    error: true,
+                    message: `Error: ${error}`,
+                    code: 0
+                });
+            });
     }
 
 }
