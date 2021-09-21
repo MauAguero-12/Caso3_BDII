@@ -1,11 +1,13 @@
-import { Logger } from '../common'
+import { Logger } from '../common';
+
+require('../conexion')
+const articulos = require('../models/modeloarticulos.ts');  //es este documento se encuentra el schema
+const bids = require('../models/modelobids.ts');  //es este documento se encuentra el schema
 
 const { response } = require('express');
 const { Promise } = require('mongoose');
-const articles = require('../conexion/articulos');  //es este documento se encuentra el schema
-const bid = require('../conexion/bids');  //es este documento se encuentra el schema
-const moment = require('moment');
-require('../conexion');
+const {moment} = require('moment');
+
 
 
 // se creara las 4 funciones solicitadas
@@ -31,9 +33,9 @@ export class subasta_articulos {
     //funcion para agregar un articulo a la subasta
     public addArticles(req,res)  : Promise <any>
     {
-        return articles.find().count().exec() //para obtener el numero de elemento y registrar una id para el nuevo articulo
+        return articulos.find().count().exec() //para obtener el numero de elemento y registrar una id para el nuevo articulo
             .then((count: any) => {
-                const nuevoArticulo = new articles(
+                const nuevoArticulo = new articulos(
                     {
                         articleID: count,
                         owner: req.body.owner,
@@ -68,7 +70,7 @@ export class subasta_articulos {
     public downArticle(req, res) : Promise<any>
     {
 
-        return articles.findOneAndUpdate({articleName: req.body.articleName, owner: req.body.owner, active: true},{open: false} ).exec()  //se actualizan los datos del articulo, deja de ser un producto activo en la subasta
+        return articulos.findOneAndUpdate({articleName: req.body.articleName, owner: req.body.owner, active: true},{open: false} ).exec()  //se actualizan los datos del articulo, deja de ser un producto activo en la subasta
         .then(()=>{
             
             console.log('Baja del producto exitosa');
@@ -76,13 +78,13 @@ export class subasta_articulos {
             //se asigna el producto a quien propuso mas dinero
 
             //averiguamos el codigo del articulo que se dio de baja en la subasta
-            const id= articles.findOne({articleName: req.body.articleName},{articleID:0,_id:0}).exec() ;
+            const id= articulos.findOne({articleName: req.body.articleName},{articleID:0,_id:0}).exec() ;
             
             //averiguamos la cantidad maxima que se ha pagado
-            const maxCant=articles.findOne({articleName: req.body.articleName},{actualPrice:0,_id:0}).exec() ;
+            const maxCant=articulos.findOne({articleName: req.body.articleName},{actualPrice:0,_id:0}).exec() ;
             
             //buscamos la persona que pagaba mas por el articulo
-            const ganador= bid.findOne({bidArticleID:id, amount:maxCant},{bidder:0}).exec() ;
+            const ganador= bids.findOne({bidArticleID:id, amount:maxCant},{bidder:0}).exec() ;
 
             //se muestra quien es el ganador
             console.log('El ganador de la subasta es %s', ganador);
@@ -101,7 +103,7 @@ export class subasta_articulos {
     public expiraArticle(res) : Promise<any>
     {
 
-        return articles.updateMany({endDate:{$gte: moment()}, active:true},{$set: {active:false}}).exec() //se cierran todos los articulos que cumplieron su fecha limite en la subasta
+        return articulos.updateMany({endDate:{$gte: moment()}, active:true},{$set: {active:false}}).exec() //se cierran todos los articulos que cumplieron su fecha limite en la subasta
         .then(()=>{
             const result = res.status(200).json({
             error: false,
