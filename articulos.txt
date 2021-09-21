@@ -1,0 +1,149 @@
+{
+    "articleID": 1,
+    "owner": "Jorge Ramos",
+    "ownerEmail": "jorgeramos@gmail.com",
+    "publicationDate": "2021-09-21",
+    "articleYear": 2011,
+    "articleName": "Gold Trophy",
+    "description": "A very shiny golden trophy",
+    "pictureURL": "https://i.imgur.com/bBjVIfL.png",
+    "initialPrice": 10000,
+    "actualPrice": 10000,
+    "endDate": "2021-10-21",
+    "active": true
+}
+
+{
+    "articleID": 2,
+    "owner": "Javier Ramirez",
+    "ownerEmail": "javiram@gmail.com",
+    "publicationDate": "2021-09-21",
+    "articleYear": 2009,
+    "articleName": "PlayStation 3 Slim",
+    "description": "One of the first playstation 3 slim consoles",
+    "pictureURL": "https://i.imgur.com/rn4Ehz9.jpeg",
+    "initialPrice": 8000,
+    "actualPrice": 9500,
+    "endDate": "2021-09-30",
+    "active": true
+}
+
+{
+    "articleID": 3,
+    "owner": "Jimena Flores",
+    "ownerEmail": "floresjime@gmail.com",
+    "publicationDate": "2021-09-21",
+    "articleYear": 2018,
+    "articleName": "Airpods",
+    "description": "Very little use",
+    "pictureURL": "https://www.mytrendyphone.eu/images/Apple-Airpods-2-with-Charging-Case-MV7N2ZM-A-0190199098572-13092019-01-p.jpg",
+    "initialPrice": 5000,
+    "actualPrice": 5100,
+    "endDate": "2021-11-21",
+    "active": true
+}
+
+{
+    "articleID": 4,
+    "owner": "Mariana Morales",
+    "ownerEmail": "marimorales@gmail.com",
+    "publicationDate": "2021-09-21",
+    "articleYear": 2015,
+    "articleName": "Fiat 500",
+    "description": "Very clean, good condition",
+    "pictureURL": "https://noticias.coches.com/wp-content/uploads/2015/07/Fiat-500-2015-22-700x440.jpg",
+    "initialPrice": 20000,
+    "actualPrice": 30000,
+    "endDate": "2021-12-31",
+    "active": true
+}
+
+{
+    "articleID": 5,
+    "owner": "Arturo Martines",
+    "ownerEmail": "arturito@gmail.com",
+    "publicationDate": "2021-09-21",
+    "articleYear": 2021,
+    "articleName": "HP Laptop",
+    "description": "Brand new laptop",
+    "pictureURL": "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6461/6461987_sd.jpg",
+    "initialPrice": 4999,
+    "actualPrice": 10999,
+    "endDate": "2021-09-22",
+    "active": true
+}
+
+{
+    "articleID": 6,
+    "owner": "Laura Soto",
+    "ownerEmail": "lau@gmail.com",
+    "publicationDate": "2021-09-21",
+    "articleYear": 2006,
+    "articleName": "iPod Shuffle",
+    "description": "Discontinued iPod Shuffle, 1GB",
+    "pictureURL": "https://foto.mercatos.net/foto/mercatos.i491661.1.Apple-iPod-shuffle-1GB",
+    "initialPrice": 15000,
+    "actualPrice": 17050,
+    "endDate": "2021-11-15",
+    "active": true
+}
+
+{
+    "articleID": 7,
+    "owner": "Sara Lopez",
+    "ownerEmail": "SaritaLopez@gmail.com",
+    "publicationDate": "2021-09-21",
+    "articleYear": 2020,
+    "articleName": "Blender",
+    "description": "Maggio blender",
+    "pictureURL": "https://www.tiendamexpress.com/images/thumbs/0031491_licuadora-maggio-mb2in1rg_600.jpeg",
+    "initialPrice": 500,
+    "actualPrice": 500,
+    "endDate": "2021-10-28",
+    "active": true
+}
+
+{
+    "articleID": 8,
+    "owner": "Victor Cordero",
+    "ownerEmail": "corderovic@gmail.com",
+    "publicationDate": "2021-09-21",
+    "articleYear": 2018,
+    "articleName": Nice Sofa",
+    "description": "Confortable, grey sofa",
+    "pictureURL": "https://www.boconcept.com/on/demandware.static/-/Sites-master-catalog/default/dw8abca927/images/40000/41432.jpg",
+    "initialPrice": 900,
+    "actualPrice": 999,
+    "endDate": "2022-01-01",
+    "active": true
+}
+
+{
+    "articleID": 9,
+    "owner": "Eduardo Rojas",
+    "ownerEmail": "eduroj@gmail.com",
+    "publicationDate": "2021-09-21",
+    "articleYear": 2019,
+    "articleName": "Used Notebooks",
+    "description": "They still have many empty pages",
+    "pictureURL": "https://ae01.alicdn.com/kf/He5609ce3b53a497b843653d0ce2e6a6ck/1-Pc-Student-Notebook-A5-Diary-60-120-Page-Notepad-60-Coil-Book.jpg_Q90.jpg_.webp",
+    "initialPrice": 50,
+    "actualPrice": 120,
+    "endDate": "2022-06-10",
+    "active": true
+}
+
+{
+    "articleID": 10,
+    "owner": "Rodrigo Nunez",
+    "ownerEmail": "vsurak@gmail.com",
+    "publicationDate": "2021-09-21",
+    "articleYear": 2021,
+    "articleName": "Lamborghini Aventador 2021",
+    "description": "I have too many cars like this one so I decided to sell it",
+    "pictureURL": "https://www.autobild.es/sites/autobild.es/public/dc/fotos/Lamborghini_Aventador_SVJ_03.jpg",
+    "initialPrice": 99999999,
+    "actualPrice": 99999999,
+    "endDate": "2022-01-20",
+    "active": true
+}
