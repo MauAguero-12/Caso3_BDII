@@ -4,6 +4,8 @@
 
 
 const mongoose = require('mongoose');
+const Schema=mongoose.Schema;
+
 // colocamos el URL de conexión local y el nombre de nuestra base de datos
 mongoose.connect('mongodb://localhost:27017/caso3');
 
@@ -14,6 +16,7 @@ db.on('error', console.error.bind(console, 'connection error:')); // enlaza el t
 db.once('open', () => {
   console.log('connected'); // si esta todo ok, imprime esto
 });
+
 
 
 //se define el schema
@@ -41,3 +44,8 @@ const bids = mongoose.model('bids',
     bidDate: Date
 
 })
+
+module.exports = {
+    articulos,
+    bids
+}
