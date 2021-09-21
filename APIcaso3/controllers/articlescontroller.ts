@@ -31,14 +31,21 @@ export class ArticleController {
     public Agregar() : Promise<any> 
     {
         const article = new subasta_articulos();
-        return article.addArticles();
+        return article.addArticles( Request,Response);
     }
 
-    //desde el controlador se llama a la función para dar de baja un articulo
+    //desde el controlador se llama a la función para dar de baja un articulo antes de tiempo
     public eliminar() : Promise<any> 
     {
         const article = new subasta_articulos();
-        return article.downArticle();
+        return article.downArticle(Request,Response);
+    }
+
+    //desde el controlador se llama a la función para dar de baja un articulo antes de tiempo
+    public expira() : Promise<any> 
+    {
+        const article = new subasta_articulos();
+        return article.expiraArticle(Request,Response);
     }
 
     //desde el controlador se llama a la función para listar los articulos
