@@ -27,6 +27,13 @@ export class ArticleController {
         return this.instance;
     }
 
+    //desde el controlador se llama a la función para mostrar articulos
+    public listar() : Promise<any> 
+    {
+        const article = new subasta_articulos();
+        return article.allArticles();
+    }
+
     //desde el controlador se llama a la función para agregar articulos
     public Agregar() : Promise<any> 
     {

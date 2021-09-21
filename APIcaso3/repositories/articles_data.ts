@@ -5,7 +5,7 @@ const { Promise } = require('mongoose');
 const articles = require('../conexion/articulos');  //es este documento se encuentra el schema
 const bid = require('../conexion/bids');  //es este documento se encuentra el schema
 const moment = require('moment');
-const { db } = require('../conexion');
+require('../conexion');
 
 
 // se creara las 4 funciones solicitadas
@@ -20,6 +20,14 @@ export class subasta_articulos {
 
     }
     
+    //funcion para obtener todos los objetos de la subasta
+    public allArticles(){
+
+        const listaArticulos = articulos.find({activo:true});
+        return listaArticulos;
+        
+    }
+
     //funcion para agregar un articulo a la subasta
     public addArticles(req,res)  : Promise <any>
     {
