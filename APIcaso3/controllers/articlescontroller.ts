@@ -1,4 +1,4 @@
-import { articles_data } from '../repositories/data_articles'
+import { subasta_articulos } from '../repositories/articles_data'
 import { Logger } from '../common'
 
 //en este documento se crearán algunos métodos que llamaran a las funciones planteadas para el caso
@@ -27,9 +27,31 @@ export class ArticleController {
         return this.instance;
     }
 
-    public listArticles() : Promise<any> 
+    //desde el controlador se llama a la función para agregar articulos
+    public Agregar() : Promise<any> 
     {
-        const dynamo = new articles_data();
-        return dynamo.getAllArticles();
+        const article = new subasta_articulos();
+        return article.addArticles();
+    }
+
+    //desde el controlador se llama a la función para dar de baja un articulo
+    public eliminar() : Promise<any> 
+    {
+        const article = new subasta_articulos();
+        return article.downArticle();
+    }
+
+    //desde el controlador se llama a la función para listar los articulos
+    public listarArticulos() : Promise<any> 
+    {
+        const article = new subasta_articulos();
+        return article.listArticles();
+    }
+
+    //desde el controlador se llama a la función para ofertar un articulo
+    public ofertarArticulos() : Promise<any> 
+    {
+        const article = new subasta_articulos();
+        return article.offerArticles();
     }
 }
