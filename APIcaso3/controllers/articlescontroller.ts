@@ -45,7 +45,7 @@ export class ArticleController {
     public expira() : Promise<any> 
     {
         const article = new subasta_articulos();
-        return article.expiraArticle(Request,Response);
+        return article.expiraArticle(Request);
     }
 
     //desde el controlador se llama a la función para listar los articulos
