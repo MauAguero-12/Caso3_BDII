@@ -1,6 +1,20 @@
 //NOTAS: EL SERVIDOR DE MONGO SE LLAMA mongoservercaso3: docker run -d --name mongoservercaso3 mongo
 // - se entra a la consola con -> docker exec -it mongoservercaso3 bash
 // - la consola se llama -> mongo
+/*inserto un registro en mongo-> db.articulos.save({
+    "articleID": 1,
+    "owner": "Jorge Ramos",
+    "ownerEmail": "jorgeramos@gmail.com",
+    "publicationDate": "2021-09-21",
+    "articleYear": 2011,
+    "articleName": "Gold Trophy",
+    "description": "A very shiny golden trophy",
+    "pictureURL": "https://i.imgur.com/bBjVIfL.png",
+    "initialPrice": 10000,
+    "actualPrice": 10000,
+    "endDate": "2021-10-21",
+    "active": true
+});*/
 
 
 const mongoose = require('mongoose');
