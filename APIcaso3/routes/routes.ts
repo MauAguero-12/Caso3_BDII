@@ -4,6 +4,7 @@ import { Logger } from '../common';
 import {kindnessrouter} from './kindness';
 import {addArticlesrouter} from './addArticlesrouter';
 import {downArticlesrouter} from './downArticlesrouter';
+import {expiraArticlesrouter} from './expiraArticulo';
 
 class Routes {
 
@@ -27,6 +28,7 @@ class Routes {
     private routes(): void {
         this.express.use('/add', addArticlesrouter);
         this.express.use('/down', downArticlesrouter);
+        this.express.use('/expira', expiraArticlesrouter);
         this.logger.info("Kindness route loaded");
     }
 }
