@@ -27,7 +27,7 @@ export class subasta_articulos {
     //funcion para obtener todos los objetos de la subasta
     public allArticles(){
 
-        const listaArticulos = articulos.find({activo:true});
+        const listaArticulos = articulos.find({active:true});
         return listaArticulos;
         
     }
