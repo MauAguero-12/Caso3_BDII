@@ -80,13 +80,13 @@ export class subasta_articulos {
             //se asigna el producto a quien propuso mas dinero
 
             //averiguamos el codigo del articulo que se dio de baja en la subasta
-            const id= articulos.findOne({articleName: req.body.articleName},{articleID:1,_id:0}).exec() ;
-            console.log(id);
+            const id= articulos.findOne({articleName: req.body.articleName},{articleID:0,_id:0}).exec() ;
+            
             //averiguamos la cantidad maxima que se ha pagado
-            const maxCant=articulos.findOne({articleName: req.body.articleName},{actualPrice:1,_id:0}).exec() ;
-            console.log(maxCant);
+            const maxCant=articulos.findOne({articleName: req.body.articleName},{actualPrice:0,_id:0}).exec() ;
+            
             //buscamos la persona que pagaba mas por el articulo
-            const ganador= bids.findOne({bidArticleID:id, amount:{$gte : maxCant}},{bidder:1,_id:0}).exec() ;
+            const ganador= bids.findOne({bidArticleID:id, amount:maxCant},{bidder:0}).exec() ;
 
             //se muestra quien es el ganador
             console.log('El ganador de la subasta es %s', ganador);
@@ -132,6 +132,11 @@ export class subasta_articulos {
         return articulos.find({active: true}).exec()
             .then(() => {
                 var arrayArticulos = articulos.find({active: true}).exec();
+
+                if (req.body.pArticleName){
+                    const nameArray = articulos.find({articleName: req.body.articleName}).exec();
+                    arrayArticulos = getArraysIntersection(arrayArticulos, nameArray);
+                }
 
                 if (req.body.pOwner == true){
                     const ownerArray = articulos.find({owner: req.body.owner}).exec();
@@ -183,11 +188,11 @@ export class subasta_articulos {
     //función de ofertar un articulo
     public offerArticles(req, res) : Promise<any>
     {
-        return articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, active:true}).exec()
+        return articulos.findOneAndUpdate({articleName: req.body.articleName, owner: req.body.owner, actualPrice: {$lt: req.body.amount}, active:true}, {actualPrice: req.body.amount}).exec()
             .then(() => {
                 const id = articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, active: true}, {articleID:1, _id: 0}).exec();
 
-                const cant = articulos.findOne({articleName: req.body.articleName, owner: req.body.owner},{actualPrice:1,_id:0}).exec();
+                const cant = articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, active: true},{actualPrice:1,_id:0}).exec();
 
                 if (cant < req.body.amount){
                     const newBid = new bids(
@@ -195,7 +200,7 @@ export class subasta_articulos {
                             bidArticleID: id,
                             bidder: req.body.bidder,
                             amount: req.body.amount,
-                            bidDate: moment
+                            bidDate: moment()
                         }
                     );
 
