@@ -5,8 +5,8 @@ import { ArticleController } from '../controllers'
 const app = express();
 const log = new Logger();
 
-app.get("/add", (req, res,next) => {
-    ArticleController.getInstance().Agregar()
+app.post("/add", (req, res) => {
+    ArticleController.getInstance().Agregar(req, res)
     .then((data)=>{
         res.json(data);
     })
