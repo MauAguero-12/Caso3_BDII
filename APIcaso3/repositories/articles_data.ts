@@ -190,9 +190,9 @@ export class subasta_articulos {
     {
         return articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, active:true}).exec()
             .then(() => {
-                const id = articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, active: true}, {articleID:0, _id: 0}).exec();
+                const id = articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, active: true}, {articleID:1, _id: 0}).exec();
 
-                const cant = articulos.findOne({articleName: req.body.articleName, owner: req.body.owner},{actualPrice:0,_id:0}).exec();
+                const cant = articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, active: true},{actualPrice:1,_id:0}).exec();
 
                 if (cant < req.body.amount){
                     const newBid = new bids(
