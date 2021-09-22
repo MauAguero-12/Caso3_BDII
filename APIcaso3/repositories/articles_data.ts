@@ -188,7 +188,7 @@ export class subasta_articulos {
     //función de ofertar un articulo
     public offerArticles(req, res) : Promise<any>
     {
-        return articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, active:true}).exec()
+        return articulos.findOneAndUpdate({articleName: req.body.articleName, owner: req.body.owner, actualPrice: {$lt: req.body.amount}, active:true}, {actualPrice: req.body.amount}).exec()
             .then(() => {
                 const id = articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, active: true}, {articleID:1, _id: 0}).exec();
 

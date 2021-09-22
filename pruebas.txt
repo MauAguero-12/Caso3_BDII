@@ -166,3 +166,31 @@ debe salir los airpods
 }
 
 debe salir el play
+
+
+
+
+
+
+
+// PARA EL DE OFERTAR
+
+{
+    "articleName": "Gold Trophy",
+    "owner": "Jorge Ramos",
+    "price": 9000,
+    "bidder": "Fio Arias"
+}
+
+no debe servir porque está apostando muy poco
+
+
+
+{
+    "articleName": "Gold Trophy",
+    "owner": "Jorge Ramos",
+    "price": 11000,
+    "bidder": "Fio Arias"
+}
+
+debe servir y actualizar los campos
