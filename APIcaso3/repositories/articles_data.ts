@@ -42,7 +42,7 @@ export class subasta_articulos {
                         articleID: count,
                         owner: req.body.owner,
                         ownerEmail: req.body.ownerEmail,
-                        publicationDate: moment(),
+                        publicationDate: req.body.publicationDate,
                         articleYear: req.body.articleYear,
                         articleName: req.body.articleName,
                         description: req.body.description,
@@ -105,11 +105,11 @@ export class subasta_articulos {
     public expiraArticle(res) : Promise<any>
     {
 
-        return articulos.updateMany({endDate:{$gte: moment()}, active:true},{$set: {active:false}}).exec() //se cierran todos los articulos que cumplieron su fecha limite en la subasta
+        return articulos.updateMany({endDate:{$gte: moment}, active:true},{$set: {active:false}}).exec() //se cierran todos los articulos que cumplieron su fecha limite en la subasta
         .then(()=>{
             const result = res.status(200).json({
             error: false,
-            message: 'Actividad completado con exito',
+            message: 'Actividad completado con exito->los articulos expirados se han dado de baja',
             code: 10
             })
         })

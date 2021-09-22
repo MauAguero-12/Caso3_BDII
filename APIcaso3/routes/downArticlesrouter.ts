@@ -5,8 +5,8 @@ import { ArticleController } from '../controllers'
 const app = express();
 const log = new Logger();
 
-app.get("/down", (req, res,next) => {
-    ArticleController.getInstance().eliminar()
+app.post("/down", (req, res) => {
+    ArticleController.getInstance().eliminar(req,res)
     .then((data)=>{
         res.json(data);
     })
