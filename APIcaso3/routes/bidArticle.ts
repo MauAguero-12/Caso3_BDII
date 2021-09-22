@@ -5,8 +5,8 @@ import { ArticleController } from '../controllers'
 const app = express();
 const log = new Logger();
 
-app.get("/bid", (req, res,next) => {
-    ArticleController.getInstance().ofertarArticulos()
+app.post("/bid", (req, res) => {
+    ArticleController.getInstance().ofertarArticulos(req,res)
     .then((data)=>{
         res.json(data);
     })

@@ -56,16 +56,16 @@ export class ArticleController {
     }
 
     //desde el controlador se llama a la función para listar los articulos
-    public listarArticulos() : Promise<any> 
+    public listarArticulos(req,res) : Promise<any> 
     {
         const article = new subasta_articulos();
-        return article.listArticles(Request, Response);
+        return article.listArticles(req, res);
     }
 
     //desde el controlador se llama a la función para ofertar un articulo
-    public ofertarArticulos() : Promise<any> 
+    public ofertarArticulos(req, res) : Promise<any> 
     {
         const article = new subasta_articulos();
-        return article.offerArticles(Request, Response);
+        return article.offerArticles(req, res);
     }
 }

@@ -6,6 +6,8 @@ import {addArticlesrouter} from './addArticlesrouter';
 import {downArticlesrouter} from './downArticlesrouter';
 import {expiraArticlesrouter} from './expiraArticulo';
 import {allArticlesrouter} from './allArticles';
+import {filterArticles} from './filterArticles';
+import {bidArticles} from './bidArticle';
 
 
 class Routes {
@@ -32,6 +34,8 @@ class Routes {
         this.express.use('/down', downArticlesrouter);
         this.express.use('/expira', expiraArticlesrouter);
         this.express.use('/list', allArticlesrouter);
+        this.express.use('/filter', filterArticles);
+        this.express.use('/bid', bidArticles);
         this.logger.info("Kindness route loaded");
     }
 }
