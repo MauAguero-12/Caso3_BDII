@@ -1,0 +1,196 @@
+// PARA EL DE LISTAR ARTICULOS
+
+{
+    "pArticleName": false,
+    "pOwner": false,
+    "pArticleYear": false,
+    "pMaxArticleYear": false,
+    "pMinArticleYear": false,
+    "pMinPrice": false,
+    "pMaxPrice": false,
+    "pMinEndDate": false,
+    "pMaxEndDate": false
+}
+
+debe dar todos los elementos
+
+
+
+{
+    "pArticleName": true,
+    "pOwner": false,
+    "pArticleYear": false,
+    "pMaxArticleYear": false,
+    "pMinArticleYear": false,
+    "pMinPrice": false,
+    "pMaxPrice": false,
+    "pMinEndDate": false,
+    "pMaxEndDate": false,
+    "articleName": "PlayStation 3 Slim"
+}
+
+debe dar solo el playstation
+
+
+
+{
+    "pArticleName": false,
+    "pOwner": true,
+    "pArticleYear": false,
+    "pMaxArticleYear": false,
+    "pMinArticleYear": false,
+    "pMinPrice": false,
+    "pMaxPrice": false,
+    "pMinEndDate": false,
+    "pMaxEndDate": false,
+    "owner": "Jorge Ramos"
+}
+
+debe dar solo el trofeo
+
+
+
+{
+    "pArticleName": false,
+    "pOwner": false,
+    "pArticleYear": true,
+    "pMaxArticleYear": false,
+    "pMinArticleYear": false,
+    "pMinPrice": false,
+    "pMaxPrice": false,
+    "pMinEndDate": false,
+    "pMaxEndDate": false,
+    "articleYear": 2018
+}
+
+debe dar solo los airpods
+
+
+
+{
+    "pArticleName": false,
+    "pOwner": false,
+    "pArticleYear": false,
+    "pMaxArticleYear": true,
+    "pMinArticleYear": false,
+    "pMinPrice": false,
+    "pMaxPrice": false,
+    "pMinEndDate": false,
+    "pMaxEndDate": false,
+    "maxArticleYear": 2012
+}
+
+debe dar el trofeo y el play
+
+
+
+{
+    "pArticleName": false,
+    "pOwner": false,
+    "pArticleYear": false,
+    "pMaxArticleYear": false,
+    "pMinArticleYear": true,
+    "pMinPrice": false,
+    "pMaxPrice": false,
+    "pMinEndDate": false,
+    "pMaxEndDate": false,
+    "minArticleYear": 2010
+}
+
+debe dar el trofeo y los airpods
+
+
+
+{
+    "pArticleName": false,
+    "pOwner": false,
+    "pArticleYear": false,
+    "pMaxArticleYear": false,
+    "pMinArticleYear": false,
+    "pMinPrice": true,
+    "pMaxPrice": false,
+    "pMinEndDate": false,
+    "pMaxEndDate": false,
+    "minPrice": 8000
+}
+
+deben salir el trofeo y el play
+
+
+
+{
+    "pArticleName": false,
+    "pOwner": false,
+    "pArticleYear": false,
+    "pMaxArticleYear": false,
+    "pMinArticleYear": false,
+    "pMinPrice": false,
+    "pMaxPrice": true,
+    "pMinEndDate": false,
+    "pMaxEndDate": false,
+    "maxPrice": 9700
+}
+
+deben salir los airpods y el play
+
+
+
+{
+    "pArticleName": false,
+    "pOwner": false,
+    "pArticleYear": false,
+    "pMaxArticleYear": false,
+    "pMinArticleYear": false,
+    "pMinPrice": false,
+    "pMaxPrice": false,
+    "pMinEndDate": true,
+    "pMaxEndDate": false,
+    "minEndDate": "2021-11-01"
+}
+
+debe salir los airpods
+
+
+
+{
+    "pArticleName": false,
+    "pOwner": false,
+    "pArticleYear": false,
+    "pMaxArticleYear": false,
+    "pMinArticleYear": false,
+    "pMinPrice": false,
+    "pMaxPrice": false,
+    "pMinEndDate": false,
+    "pMaxEndDate": true,
+    "maxEndDate": "2021-10-01"
+}
+
+debe salir el play
+
+
+
+
+
+
+
+// PARA EL DE OFERTAR
+
+{
+    "articleName": "Gold Trophy",
+    "owner": "Jorge Ramos",
+    "price": 9000,
+    "bidder": "Fio Arias"
+}
+
+no debe servir porque está apostando muy poco
+
+
+
+{
+    "articleName": "Gold Trophy",
+    "owner": "Jorge Ramos",
+    "price": 11000,
+    "bidder": "Fio Arias"
+}
+
+debe servir y actualizar los campos
