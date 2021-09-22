@@ -133,6 +133,11 @@ export class subasta_articulos {
             .then(() => {
                 var arrayArticulos = articulos.find({active: true}).exec();
 
+                if (req.body.pArticleName){
+                    const nameArray = articulos.find({articleName: req.body.articleName}).exec();
+                    arrayArticulos = getArraysIntersection(arrayArticulos, nameArray);
+                }
+
                 if (req.body.pOwner == true){
                     const ownerArray = articulos.find({owner: req.body.owner}).exec();
                     arrayArticulos = getArraysIntersection(arrayArticulos, ownerArray);
