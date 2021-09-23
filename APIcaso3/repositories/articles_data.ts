@@ -5,7 +5,7 @@ const articulos = require('../models/modeloarticulos.ts');  //es este documento 
 const bids = require('../models/modelobids.ts');  //es este documento se encuentra el schema
 
 const { response } = require('express');
-const { Promise } = require('mongoose');
+//const { Promise } = require('mongoose');
 const {moment} = require('moment');
 
 
@@ -72,24 +72,24 @@ export class subasta_articulos {
     public downArticle(req, res) : Promise<any>
     {
 
-        return articulos.findOneAndUpdate({articleName: req.body.articleName, owner: req.body.owner, active: true},{open: false} ).exec()  //se actualizan los datos del articulo, deja de ser un producto activo en la subasta
-        .then(()=>{
+        return articulos.findOneAndUpdate({articleName: req.body.articleName, owner: req.body.owner, active: true},{active: false} ).exec()  //se actualizan los datos del articulo, deja de ser un producto activo en la subasta
+        .then(async ()=>{
             
             console.log('Baja del producto exitosa');
 
             //se asigna el producto a quien propuso mas dinero
 
             //averiguamos el codigo del articulo que se dio de baja en la subasta
-            const id= articulos.findOne({articleName: req.body.articleName},{articleID:0,_id:0}).exec() ;
-            
+            const id= await articulos.findOne({articleName: req.body.articleName},{articleID:1,_id:0}).exec() ;
+            console.log(id);
             //averiguamos la cantidad maxima que se ha pagado
-            const maxCant=articulos.findOne({articleName: req.body.articleName},{actualPrice:0,_id:0}).exec() ;
-            
+            const maxCant= await articulos.findOne({articleName: req.body.articleName},{actualPrice:1,_id:0}).exec() ;
+            console.log(maxCant);
             //buscamos la persona que pagaba mas por el articulo
-            const ganador= bids.findOne({bidArticleID:id, amount:maxCant},{bidder:0}).exec() ;
-
+            const ganador= await bids.findOne({bidArticleID:id.articleID, amount:maxCant.actualPrice},{bidder:1,_id:0}).exec() ;
+            console.log(ganador);
             //se muestra quien es el ganador
-            console.log('El ganador de la subasta es %s', ganador);
+            console.log('El ganador de la subasta es %s', ganador.bidder);
         
             })
             .catch((error: any)=>{
