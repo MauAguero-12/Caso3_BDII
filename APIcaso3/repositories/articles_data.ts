@@ -130,51 +130,52 @@ export class subasta_articulos {
     public listArticles(req, res) : Promise<any>
     {
         return articulos.find({active: true}).exec()
-            .then(() => {
-                var arrayArticulos = articulos.find({active: true}).exec();
+            .then(async () => {
+                var arrayArticulos = await articulos.find({active: true}).exec();
 
                 if (req.body.pArticleName == true){
-                    const nameArray = articulos.find({articleName: req.body.articleName}).exec();
+                    const nameArray = await articulos.find({articleName: req.body.articleName}).exec();
                     arrayArticulos = getArraysIntersection(arrayArticulos, nameArray);
                 }
 
                 if (req.body.pOwner == true){
-                    const ownerArray = articulos.find({owner: req.body.owner}).exec();
+                    const ownerArray = await articulos.find({owner: req.body.owner}).exec();
                     arrayArticulos = getArraysIntersection(arrayArticulos, ownerArray);
                 }
 
                 if (req.body.pArticleYear == true){
-                    const yearArray = articulos.find({articleYear: req.body.articleYear}).exec();
+                    const yearArray = await articulos.find({articleYear: req.body.articleYear}).exec();
                     arrayArticulos = getArraysIntersection(arrayArticulos, yearArray);
                 }
                 if (req.body.pMaxArticleYear == true){
-                    const maxYearArray = articulos.find({articleYear:{$lte: req.body.maxArticleYear}}).exec();
+                    const maxYearArray = await articulos.find({articleYear:{$lte: req.body.maxArticleYear}}).exec();
                     arrayArticulos = getArraysIntersection(arrayArticulos, maxYearArray);
                 }
                 if (req.body.pMinArticleYear == true){
-                    const minYearArray = articulos.find({articleYear:{$gte: req.body.minArticleYear}}).exec();
+                    const minYearArray = await articulos.find({articleYear:{$gte: req.body.minArticleYear}}).exec();
                     arrayArticulos = getArraysIntersection(arrayArticulos, minYearArray);
                 }
 
                 if (req.body.pMinPrice == true){
-                    const minPriceArray = articulos.find({actualPrice: {$gte: req.body.minActualPrice}}).exec();
+                    const minPriceArray = await articulos.find({actualPrice: {$gte: req.body.minActualPrice}}).exec();
                     arrayArticulos = getArraysIntersection(arrayArticulos, minPriceArray);
                 }
                 if (req.body.pMaxPrice == true){
-                    const maxPriceArray = articulos.find({actualPrice: {$lte: req.body.maxActualPrice}}).exec();
+                    const maxPriceArray = await articulos.find({actualPrice: {$lte: req.body.maxActualPrice}}).exec();
                     arrayArticulos = getArraysIntersection(arrayArticulos, maxPriceArray);
                 }
 
                 if (req.body.pMinEndDate == true){
-                    const minDateArray = articulos.find({endDate: {$gte: req.body.minEndDate}}).exec();
+                    const minDateArray = await articulos.find({endDate: {$gte: req.body.minEndDate}}).exec();
                     arrayArticulos = getArraysIntersection(arrayArticulos, minDateArray);
                 }
                 if (req.body.pMaxEndDate == true){
-                    const maxDateArray = articulos.find({endDate: {$lte: req.body.maxEndDate}}).exec();
+                    const maxDateArray = await articulos.find({endDate: {$lte: req.body.maxEndDate}}).exec();
                     arrayArticulos = getArraysIntersection(arrayArticulos, maxDateArray);
                 }
 
                 console.log(arrayArticulos);
+                console.log();
             })
             .catch((error: any) => {
                 const result = res.status(500).json({
@@ -194,9 +195,6 @@ export class subasta_articulos {
 
                 const cant = await articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, active: true},{actualPrice:1,_id:0}).exec();
 
-                console.log(id);
-                console.log(cant);
-
                 if (cant.actualPrice < req.body.amount){
                     console.log("Entro al if");
 
@@ -213,10 +211,12 @@ export class subasta_articulos {
                     newBid.save();
                     articulos.findOneAndUpdate({articleName: req.body.articleName, owner: req.body.owner, actualPrice: {$lt: req.body.amount}, active:true}, {actualPrice: req.body.amount}).exec();
 
-                    console.log("Se registro la subasta");
+                    console.log("Se registro la puja");
+                    console.log();
                 }
                 else{
                     console.log('Debe apostar un monto mayor a %d', cant.actualPrice);
+                    console.log();
                 }
             })
             .catch((error: any) => {
