@@ -179,7 +179,8 @@ debe salir el play
     "articleName": "Gold Trophy",
     "owner": "Jorge Ramos",
     "price": 9000,
-    "bidder": "Fio Arias"
+    "bidder": "Fio Arias",
+    "bidDate": "2021-09-22"
 }
 
 no debe servir porque está apostando muy poco
@@ -190,7 +191,8 @@ no debe servir porque está apostando muy poco
     "articleName": "Gold Trophy",
     "owner": "Jorge Ramos",
     "price": 11000,
-    "bidder": "Fio Arias"
+    "bidder": "Fio Arias",
+    "bidDate": "2021-09-22"
 }
 
 debe servir y actualizar los campos

@@ -133,7 +133,7 @@ export class subasta_articulos {
             .then(() => {
                 var arrayArticulos = articulos.find({active: true}).exec();
 
-                if (req.body.pArticleName){
+                if (req.body.pArticleName == true){
                     const nameArray = articulos.find({articleName: req.body.articleName}).exec();
                     arrayArticulos = getArraysIntersection(arrayArticulos, nameArray);
                 }
@@ -188,27 +188,35 @@ export class subasta_articulos {
     //función de ofertar un articulo
     public offerArticles(req, res) : Promise<any>
     {
-        return articulos.findOneAndUpdate({articleName: req.body.articleName, owner: req.body.owner, actualPrice: {$lt: req.body.amount}, active:true}, {actualPrice: req.body.amount}).exec()
-            .then(() => {
-                const id = articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, active: true}, {articleID:1, _id: 0}).exec();
+        return articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, actualPrice: {$lt: req.body.amount}, active:true}, {actualPrice: req.body.amount}).exec()
+            .then(async () => {
+                const id = await articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, active: true}, {articleID:1, _id: 0}).exec();
 
-                const cant = articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, active: true},{actualPrice:1,_id:0}).exec();
+                const cant = await articulos.findOne({articleName: req.body.articleName, owner: req.body.owner, active: true},{actualPrice:1,_id:0}).exec();
 
-                if (cant < req.body.amount){
+                console.log(id);
+                console.log(cant);
+
+                if (cant.actualPrice < req.body.amount){
+                    console.log("Entro al if");
+
                     const newBid = new bids(
                         {
-                            bidArticleID: id,
+                            bidArticleID: id.articleID,
                             bidder: req.body.bidder,
                             amount: req.body.amount,
-                            bidDate: moment()
+                            bidDate: req.body.bidDate
                         }
                     );
 
                     console.log(newBid);
                     newBid.save();
+                    articulos.findOneAndUpdate({articleName: req.body.articleName, owner: req.body.owner, actualPrice: {$lt: req.body.amount}, active:true}, {actualPrice: req.body.amount}).exec();
+
+                    console.log("Se registro la subasta");
                 }
                 else{
-                    console.log('Debe apostar un monto mayor a %d', cant);
+                    console.log('Debe apostar un monto mayor a %d', cant.actualPrice);
                 }
             })
             .catch((error: any) => {
