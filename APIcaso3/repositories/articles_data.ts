@@ -14,7 +14,7 @@ const {moment} = require('moment');
 //se accede a una nueva conexion...
 
 function getArraysIntersection(a1,a2){
-    return  a1.filter(function(n) { return a2.indexOf(n) !== -1;});
+    return a1;
 }
 
 export class subasta_articulos {
@@ -131,6 +131,40 @@ export class subasta_articulos {
     {
         return articulos.find({active: true}).exec()
             .then(async () => {
+                var filtros = {active: true,
+                    articleName: {$ne: ""},
+                    owner: {$ne: ""},
+                    articleYear: {$ne: ""},
+                    actualPrice:  {$ne: ""},
+                    endDate:  {$ne: ""},
+                };
+
+                if (req.body.pArticleName == true){
+                    filtros.articleName = req.body.articleName;
+                }
+
+                if (req.body.pOwner == true){
+                    filtros.owner = req.body.owner;
+                }
+
+                if (req.body.pArticleYear == true){
+                    filtros.articleYear = req.body.articleYear
+                }
+
+                if (req.body.pActualPrice == true){
+                    filtros.actualPrice = req.body.actualPrice
+                }
+                /*
+                if (req.body.pEndDate == true){
+                    filtros.articleYear = req.body.endDate
+                }*/
+                
+                const arrayArticulos = await articulos.find(filtros).exec()
+
+                console.log(arrayArticulos);
+                console.log();
+
+                /*
                 var arrayArticulos = await articulos.find({active: true}).exec();
 
                 if (req.body.pArticleName == true){
@@ -140,7 +174,9 @@ export class subasta_articulos {
 
                 if (req.body.pOwner == true){
                     const ownerArray = await articulos.find({owner: req.body.owner}).exec();
-                    arrayArticulos = getArraysIntersection(arrayArticulos, ownerArray);
+                    console.log(arrayArticulos);
+                    console.log(ownerArray);
+                    arrayArticulos = getArraysIntersection([{"name": "abc"}, {"name": "def"}], [{"name": "abc"}, {"name": "ghi"}]);
                 }
 
                 if (req.body.pArticleYear == true){
@@ -172,10 +208,7 @@ export class subasta_articulos {
                 if (req.body.pMaxEndDate == true){
                     const maxDateArray = await articulos.find({endDate: {$lte: req.body.maxEndDate}}).exec();
                     arrayArticulos = getArraysIntersection(arrayArticulos, maxDateArray);
-                }
-
-                console.log(arrayArticulos);
-                console.log();
+                }*/
             })
             .catch((error: any) => {
                 const result = res.status(500).json({
