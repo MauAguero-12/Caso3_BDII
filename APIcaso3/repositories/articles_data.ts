@@ -13,10 +13,6 @@ const {moment} = require('moment');
 // se creara las 4 funciones solicitadas
 //se accede a una nueva conexion...
 
-function getArraysIntersection(a1,a2){
-    return a1;
-}
-
 export class subasta_articulos {
     private log: Logger;
     
@@ -154,61 +150,15 @@ export class subasta_articulos {
                 if (req.body.pActualPrice == true){
                     filtros.actualPrice = req.body.actualPrice
                 }
-                /*
+                
                 if (req.body.pEndDate == true){
                     filtros.articleYear = req.body.endDate
-                }*/
+                }
                 
                 const arrayArticulos = await articulos.find(filtros).exec()
 
                 console.log(arrayArticulos);
                 console.log();
-
-                /*
-                var arrayArticulos = await articulos.find({active: true}).exec();
-
-                if (req.body.pArticleName == true){
-                    const nameArray = await articulos.find({articleName: req.body.articleName}).exec();
-                    arrayArticulos = getArraysIntersection(arrayArticulos, nameArray);
-                }
-
-                if (req.body.pOwner == true){
-                    const ownerArray = await articulos.find({owner: req.body.owner}).exec();
-                    console.log(arrayArticulos);
-                    console.log(ownerArray);
-                    arrayArticulos = getArraysIntersection([{"name": "abc"}, {"name": "def"}], [{"name": "abc"}, {"name": "ghi"}]);
-                }
-
-                if (req.body.pArticleYear == true){
-                    const yearArray = await articulos.find({articleYear: req.body.articleYear}).exec();
-                    arrayArticulos = getArraysIntersection(arrayArticulos, yearArray);
-                }
-                if (req.body.pMaxArticleYear == true){
-                    const maxYearArray = await articulos.find({articleYear:{$lte: req.body.maxArticleYear}}).exec();
-                    arrayArticulos = getArraysIntersection(arrayArticulos, maxYearArray);
-                }
-                if (req.body.pMinArticleYear == true){
-                    const minYearArray = await articulos.find({articleYear:{$gte: req.body.minArticleYear}}).exec();
-                    arrayArticulos = getArraysIntersection(arrayArticulos, minYearArray);
-                }
-
-                if (req.body.pMinPrice == true){
-                    const minPriceArray = await articulos.find({actualPrice: {$gte: req.body.minActualPrice}}).exec();
-                    arrayArticulos = getArraysIntersection(arrayArticulos, minPriceArray);
-                }
-                if (req.body.pMaxPrice == true){
-                    const maxPriceArray = await articulos.find({actualPrice: {$lte: req.body.maxActualPrice}}).exec();
-                    arrayArticulos = getArraysIntersection(arrayArticulos, maxPriceArray);
-                }
-
-                if (req.body.pMinEndDate == true){
-                    const minDateArray = await articulos.find({endDate: {$gte: req.body.minEndDate}}).exec();
-                    arrayArticulos = getArraysIntersection(arrayArticulos, minDateArray);
-                }
-                if (req.body.pMaxEndDate == true){
-                    const maxDateArray = await articulos.find({endDate: {$lte: req.body.maxEndDate}}).exec();
-                    arrayArticulos = getArraysIntersection(arrayArticulos, maxDateArray);
-                }*/
             })
             .catch((error: any) => {
                 const result = res.status(500).json({
