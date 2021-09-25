@@ -120,7 +120,7 @@ var cards = [
          phone: "2021-09-21/2021-10-22" //fecha inicial y final
      }))
     },
-    {imgUrl: "https://foto.mercatos.net/foto/mercatos.i491661.1.Apple-iPod-shuffle-1GB",  //foto
+    {imgUrl: "https://m.media-amazon.com/images/I/71t3cPd5dgL._AC_SY606_.jpg",  //foto
      price: "15000/17050",  //precio incial y actual
      attributes: "featured",
      featureMsg: "2006", //year of article
